@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nombre": "Alimento para perro adulto 3 kg",
+    "categoria": "perros",
+    "descripcion": "Alimento balanceado para perros adultos.",
+    "precio": 18500
+  },
+  {
+    "id": 2,
+    "nombre": "Correa ajustable para perro",
+    "categoria": "perros",
+    "descripcion": "Correa resistente para paseos diarios.",
+    "precio": 7200
+  },
+  {
+    "id": 3,
+    "nombre": "Juguete mordillo",
+    "categoria": "perros",
+    "descripcion": "Juguete de goma para jugar y morder.",
+    "precio": 4500
+  },
+  {
+    "id": 4,
+    "nombre": "Alimento para gato adulto 3 kg",
+    "categoria": "gatos",
+    "descripcion": "Alimento balanceado para gatos adultos.",
+    "precio": 19900
+  },
+  {
+    "id": 5,
+    "nombre": "Piedras sanitarias 4 kg",
+    "categoria": "gatos",
+    "descripcion": "Piedras absorbentes para la bandeja sanitaria.",
+    "precio": 8900
+  },
+  {
+    "id": 6,
+    "nombre": "Juguete con plumas",
+    "categoria": "gatos",
+    "descripcion": "Varita con plumas para estimular el juego.",
+    "precio": 3900
+  }
+]

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="titulo">
+  <title id="titulo">Huella de mascota</title>
+  <g fill="#ffffff">
+    <ellipse cx="23" cy="32" rx="9" ry="13" transform="rotate(-20 23 32)"></ellipse>
+    <ellipse cx="43" cy="20" rx="9" ry="13" transform="rotate(-8 43 20)"></ellipse>
+    <ellipse cx="64" cy="22" rx="9" ry="13" transform="rotate(8 64 22)"></ellipse>
+    <ellipse cx="82" cy="37" rx="9" ry="13" transform="rotate(20 82 37)"></ellipse>
+    <path d="M50 43c-11 0-16 7-23 17-5 7-6 13-2 19 5 8 13 4 25 4s20 4 25-4c4-6 3-12-2-19-7-10-12-17-23-17Z"></path>
+  </g>
+</svg>

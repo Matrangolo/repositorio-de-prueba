@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetLab | Tienda para mascotas</title>
+
+  <link rel="stylesheet" href="assets/css/estilos.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  <script src="assets/js/productos.js" defer></script>
+  <script src="assets/js/carrito.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="assets/img/huella.svg" alt="" width="60" height="60">
+    <h1>PetLab</h1>
+    <p>Entrega final JavaScript Coderhouse - Valentín Matrangolo</p>
+    <p>Todo para perros y gatos</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="titulo-productos">
+      <h2 id="titulo-productos">Productos</h2>
+
+      <label for="busqueda">Buscar producto</label>
+      <input id="busqueda" type="search" placeholder="¿Qué estás buscando?">
+
+      <label for="categoria">Categoría</label>
+      <select id="categoria">
+        <option value="todos">Todos</option>
+        <option value="perros">Perros</option>
+        <option value="gatos">Gatos</option>
+      </select>
+
+      <p id="estado-productos">Próximamente vas a ver los productos acá.</p>
+      <div id="lista-productos"></div>
+    </section>
+
+    <section aria-labelledby="titulo-carrito">
+      <h2 id="titulo-carrito">Carrito</h2>
+      <div id="lista-carrito">
+        <p>Tu carrito está vacío.</p>
+      </div>
+      <p>Total: <strong id="total-carrito">$0</strong></p>
+      <button id="vaciar-carrito" type="button">Vaciar carrito</button>
+    </section>
+
+    <section aria-labelledby="titulo-pedido">
+      <h2 id="titulo-pedido">Finalizar pedido</h2>
+
+      <form id="formulario-pedido">
+        <label for="nombre-cliente">Nombre</label>
+        <input id="nombre-cliente" name="nombre" type="text" required>
+
+        <label for="direccion-cliente">Dirección de entrega</label>
+        <input id="direccion-cliente" name="direccion" type="text" required>
+
+        <button type="submit">Confirmar pedido</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="titulo-historial">
+      <h2 id="titulo-historial">Pedidos realizados</h2>
+      <div id="historial-pedidos">
+        <p>Todavía no hay pedidos.</p>
+      </div>
+      <button id="vaciar-historial" type="button">Borrar historial</button>
+    </section>
+  </main>
+</body>
+</html>
