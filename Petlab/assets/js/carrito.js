@@ -4,6 +4,8 @@ const botonVaciarCarrito = document.querySelector("#vaciar-carrito");
 const formularioPedido = document.querySelector("#formulario-pedido");
 const historialPedidos = document.querySelector("#historial-pedidos");
 const botonVaciarHistorial = document.querySelector("#vaciar-historial");
+const campoNombre = document.querySelector("#nombre-cliente");
+const campoDireccion = document.querySelector("#direccion-cliente");
 
 let carrito = JSON.parse(localStorage.getItem("petlab-carrito")) || [];
 let pedidos = JSON.parse(localStorage.getItem("petlab-pedidos")) || [];
@@ -26,12 +28,12 @@ function guardarCarrito() {
 }
 
 function mostrarCarrito() {
-  listaCarrito.replaceChildren();
+  listaCarrito.innerHTML = "";
 
   if (carrito.length === 0) {
     const mensaje = document.createElement("p");
     mensaje.textContent = "Tu carrito está vacío.";
-    listaCarrito.append(mensaje);
+    listaCarrito.appendChild(mensaje);
   }
 
   carrito.forEach((producto) => {
@@ -43,27 +45,28 @@ function mostrarCarrito() {
 
     descripcion.textContent =
       `${producto.nombre} × ${producto.cantidad} — ` +
-      `$${(producto.precio * producto.cantidad).toLocaleString("es-AR")}`;
+      `$${producto.precio * producto.cantidad}`;
 
     botonRestar.textContent = "−";
     botonRestar.type = "button";
-    botonRestar.setAttribute("aria-label", `Restar una unidad de ${producto.nombre}`);
     botonRestar.addEventListener("click", () => cambiarCantidad(producto.id, -1));
 
     botonSumar.textContent = "+";
     botonSumar.type = "button";
-    botonSumar.setAttribute("aria-label", `Sumar una unidad de ${producto.nombre}`);
     botonSumar.addEventListener("click", () => cambiarCantidad(producto.id, 1));
 
     botonQuitar.textContent = "Quitar";
     botonQuitar.type = "button";
     botonQuitar.addEventListener("click", () => quitarProducto(producto.id));
 
-    detalle.append(descripcion, botonRestar, botonSumar, botonQuitar);
-    listaCarrito.append(detalle);
+    detalle.appendChild(descripcion);
+    detalle.appendChild(botonRestar);
+    detalle.appendChild(botonSumar);
+    detalle.appendChild(botonQuitar);
+    listaCarrito.appendChild(detalle);
   });
 
-  totalCarrito.textContent = `$${calcularTotal().toLocaleString("es-AR")}`;
+  totalCarrito.textContent = `$${calcularTotal()}`;
   botonVaciarCarrito.disabled = carrito.length === 0;
 }
 
@@ -111,22 +114,21 @@ function quitarProducto(idProducto) {
 }
 
 function mostrarPedidos() {
-  historialPedidos.replaceChildren();
+  historialPedidos.innerHTML = "";
 
   if (pedidos.length === 0) {
     const mensaje = document.createElement("p");
     mensaje.textContent = "Todavía no hay pedidos.";
-    historialPedidos.append(mensaje);
+    historialPedidos.appendChild(mensaje);
   }
 
   pedidos.forEach((pedido) => {
     const detalle = document.createElement("p");
 
     detalle.textContent =
-      `Pedido #${pedido.numero} — ${pedido.nombre} — ` +
-      `$${pedido.total.toLocaleString("es-AR")}`;
+      `Pedido #${pedido.numero} — ${pedido.nombre} — $${pedido.total}`;
 
-    historialPedidos.append(detalle);
+    historialPedidos.appendChild(detalle);
   });
 
   botonVaciarHistorial.disabled = pedidos.length === 0;
@@ -140,8 +142,8 @@ formularioPedido.addEventListener("submit", (evento) => {
     return;
   }
 
-  const nombre = document.querySelector("#nombre-cliente").value.trim();
-  const direccion = document.querySelector("#direccion-cliente").value.trim();
+  const nombre = campoNombre.value.trim();
+  const direccion = campoDireccion.value.trim();
 
   if (!nombre || !direccion) {
     Swal.fire("Faltan datos", "Completá tu nombre y dirección.", "warning");
@@ -149,7 +151,7 @@ formularioPedido.addEventListener("submit", (evento) => {
   }
 
   const pedido = {
-    numero: Date.now(),
+    numero: pedidos.length + 1,
     nombre,
     direccion,
     productos: carrito.map((producto) => ({ ...producto })),
@@ -162,11 +164,13 @@ formularioPedido.addEventListener("submit", (evento) => {
   carrito = [];
   guardarCarrito();
   mostrarPedidos();
-  formularioPedido.reset();
+
+  campoNombre.value = "";
+  campoDireccion.value = "";
 
   Swal.fire(
     "¡Pedido confirmado!",
-    `Pedido #${pedido.numero} por $${pedido.total.toLocaleString("es-AR")}.`,
+    `Pedido #${pedido.numero} por $${pedido.total}.`,
     "success"
   );
 });

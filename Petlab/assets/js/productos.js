@@ -6,7 +6,7 @@ const selectorCategoria = document.querySelector("#categoria");
 let productos = [];
 
 function mostrarProductos(productosParaMostrar) {
-  listaProductos.replaceChildren();
+  listaProductos.innerHTML = "";
 
   if (productosParaMostrar.length === 0) {
     estadoProductos.textContent = "No encontramos productos con esos filtros.";
@@ -29,21 +29,19 @@ function mostrarProductos(productosParaMostrar) {
     categoriaProducto.textContent =
       categoria === "perros" ? "Para perros" : "Para gatos";
     descripcionProducto.textContent = descripcion;
-    precioProducto.textContent = `$${precio.toLocaleString("es-AR")}`;
+    precioProducto.textContent = `$${precio}`;
 
     botonAgregar.textContent = "Agregar al carrito";
     botonAgregar.type = "button";
     botonAgregar.addEventListener("click", () => agregarAlCarrito(producto));
 
-    tarjeta.append(
-      tituloProducto,
-      categoriaProducto,
-      descripcionProducto,
-      precioProducto,
-      botonAgregar
-    );
+    tarjeta.appendChild(tituloProducto);
+    tarjeta.appendChild(categoriaProducto);
+    tarjeta.appendChild(descripcionProducto);
+    tarjeta.appendChild(precioProducto);
+    tarjeta.appendChild(botonAgregar);
 
-    listaProductos.append(tarjeta);
+    listaProductos.appendChild(tarjeta);
   });
 }
 
@@ -72,16 +70,10 @@ async function cargarProductos() {
       throw new Error("No se pudo cargar el archivo de productos.");
     }
 
-    const datos = await respuesta.json();
-
-    if (!Array.isArray(datos)) {
-      throw new Error("El archivo de productos no tiene el formato esperado.");
-    }
-
-    productos = datos;
+    productos = await respuesta.json();
     filtrarProductos();
   } catch (error) {
-    listaProductos.replaceChildren();
+    listaProductos.innerHTML = "";
     estadoProductos.textContent =
       "No pudimos cargar los productos. Intentá actualizar la página.";
   } finally {
